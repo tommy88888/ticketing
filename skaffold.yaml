@@ -1,0 +1,69 @@
+apiVersion: skaffold/v4beta6
+kind: Config
+build:
+  tagPolicy:
+    sha256: {}
+  # googleCloudBuild:
+  #   projectId: ticket-396008
+  artifacts:
+    - image: justin8888/auth
+      # - image: asia-southeast1-docker.pkg.dev/ticketing-396008/ticket/auth
+      context: auth
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+      docker:
+        dockerfile: Dockerfile
+    - image: justin8888/client
+      # - image: asia-southeast1-docker.pkg.dev/ticketing-396008/ticket/client
+      context: client
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .
+      docker:
+        dockerfile: Dockerfile
+    - image: justin8888/tickets
+      # - image: asia-southeast1-docker.pkg.dev/ticketing-396008/ticket/tickets
+      context: tickets
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+      docker:
+        dockerfile: Dockerfile
+    - image: justin8888/orders
+      # - image: asia-southeast1-docker.pkg.dev/ticketing-396008/ticket/orders
+      context: orders
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+      docker:
+        dockerfile: Dockerfile
+    - image: justin8888/expiration
+      # - image: asia-southeast1-docker.pkg.dev/ticketing-396008/ticket/expiration
+      context: expiration
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+      docker:
+        dockerfile: Dockerfile
+    - image: justin8888/payments
+      # - image: asia-southeast1-docker.pkg.dev/ticketing-396008/ticket/payments
+      context: payments
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+      docker:
+        dockerfile: Dockerfile
+  local:
+    push: false
+manifests:
+  rawYaml:
+    - ./infra/k8s/*
+deploy:
+  kubectl: {}
