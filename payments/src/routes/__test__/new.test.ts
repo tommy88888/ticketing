@@ -78,12 +78,13 @@ it('returns a 201 with valid inputs', async () => {
     })
     .expect(201);
 
-  const stripeCharges = await stripe.charges.list({ limit: 50 });
+  const stripeCharges = await stripe.paymentIntents.list({ limit: 50 });
 
   const stripeCharge = stripeCharges.data.find((charge) => {
     return charge.amount === price * 100;
   });
 
+  console.log(stripeCharge);
   expect(stripeCharge).toBeDefined();
 
   // const chargeOptions = (stripe.charges.create as jest.Mock).mock.calls[0][0];

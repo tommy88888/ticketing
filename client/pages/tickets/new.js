@@ -27,6 +27,8 @@ const NewTicket = () => {
   const handleSubmit = (e) => {
     e.preventDefault(e);
     doRequest();
+    setTitle('');
+    setPrice('');
   };
 
   return (
