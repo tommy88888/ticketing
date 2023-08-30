@@ -12,9 +12,10 @@ export default ({ url, method, body, onSuccess }) => {
       if (onSuccess) {
         onSuccess(res.data);
       }
-      console.log('use request', res.data);
+      // console.log('use request', res);
       return res.data;
     } catch (err) {
+      // console.log(err);
       setErrors(
         <div className='alert alert-danger'>
           <h4> Oops...</h4>

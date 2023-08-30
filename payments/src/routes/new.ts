@@ -1,3 +1,5 @@
+import express, { Request, Response } from 'express';
+import { body } from 'express-validator';
 import {
   BadRequestError,
   NotAuthorizedError,
@@ -6,13 +8,10 @@ import {
   requireAuth,
   validateRequest,
 } from '@tomtickets/common';
-
-import express, { Request, Response } from 'express';
-import { body } from 'express-validator';
 import { Order } from '../models/order';
 import { stripe } from '../stripe';
 import { Payment } from '../models/payment';
-import { PaymentCreatedPublisher } from '../events/listeners/publishers/payment-created-publisher';
+import { PaymentCreatedPublisher } from '../events/publishers/payment-created-publisher';
 import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
@@ -38,15 +37,10 @@ router.post(
       throw new BadRequestError('Cannot pay for an cancelled order');
     }
 
-    // const charge = await stripe.charges.create({
-    //   currency: 'usd',
-    //   amount: order.price * 100,
-    //   source: token,
-    // });
-    const charge = await stripe.paymentIntents.create({
+    const charge = await stripe.charges.create({
       currency: 'usd',
       amount: order.price * 100,
-      // source: token,
+      source: token,
     });
 
     console.log('charge', charge);
@@ -66,7 +60,6 @@ router.post(
 
     res.status(201).send({
       id: payment.id,
-      body: JSON.stringify({ client_secret: charge.client_secret }),
     });
   }
 );
