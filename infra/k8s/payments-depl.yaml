@@ -15,7 +15,7 @@ spec:
       containers:
         - name: payments
           image: justin8888/payments
-          # image: asia-southeast1-docker.pkg.dev/ticket-396008/ticket/payments
+          # image: asia.gcr.io/tick-397513/payments
           # ports:
           #   - containerPort: 3000
           env:

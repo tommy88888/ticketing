@@ -17,7 +17,7 @@ spec:
       containers:
         - name: auth
           image: justin8888/auth
-          # image: asia-southeast1-docker.pkg.dev/ticket-396008/ticket/auth
+          # image: asia.gcr.io/tick-397513/auth
           # ports:
           #   - containerPort: 3000
           env:

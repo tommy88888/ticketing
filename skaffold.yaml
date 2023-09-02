@@ -1,13 +1,15 @@
-apiVersion: skaffold/v4beta6
+apiVersion: skaffold/v4beta2
 kind: Config
 build:
+  # googleCloudBuild:
+  #   projectId: tick-397513
+  local:
+    push: false
   tagPolicy:
     sha256: {}
-  # googleCloudBuild:
-  #   projectId: ticket-396008
   artifacts:
     - image: justin8888/auth
-      # - image: asia-southeast1-docker.pkg.dev/ticketing-396008/ticket/auth
+      # - image: asia.gcr.io/tick-397513/auth
       context: auth
       sync:
         manual:
@@ -16,7 +18,7 @@ build:
       docker:
         dockerfile: Dockerfile
     - image: justin8888/client
-      # - image: asia-southeast1-docker.pkg.dev/ticketing-396008/ticket/client
+      # - image: asia.gcr.io/tick-397513/client
       context: client
       sync:
         manual:
@@ -25,7 +27,7 @@ build:
       docker:
         dockerfile: Dockerfile
     - image: justin8888/tickets
-      # - image: asia-southeast1-docker.pkg.dev/ticketing-396008/ticket/tickets
+      # - image: asia.gcr.io/tick-397513/tickets
       context: tickets
       sync:
         manual:
@@ -34,7 +36,7 @@ build:
       docker:
         dockerfile: Dockerfile
     - image: justin8888/orders
-      # - image: asia-southeast1-docker.pkg.dev/ticketing-396008/ticket/orders
+      # - image: asia.gcr.io/tick-397513/orders
       context: orders
       sync:
         manual:
@@ -43,7 +45,7 @@ build:
       docker:
         dockerfile: Dockerfile
     - image: justin8888/expiration
-      # - image: asia-southeast1-docker.pkg.dev/ticketing-396008/ticket/expiration
+      # - image: asia.gcr.io/tick-397513/expiration
       context: expiration
       sync:
         manual:
@@ -52,7 +54,7 @@ build:
       docker:
         dockerfile: Dockerfile
     - image: justin8888/payments
-      # - image: asia-southeast1-docker.pkg.dev/ticketing-396008/ticket/payments
+      # - image: asia.gcr.io/tick-397513/payments
       context: payments
       sync:
         manual:
@@ -60,8 +62,6 @@ build:
             dest: .
       docker:
         dockerfile: Dockerfile
-  local:
-    push: false
 manifests:
   rawYaml:
     - ./infra/k8s/*

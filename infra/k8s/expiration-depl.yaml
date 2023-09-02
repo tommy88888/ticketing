@@ -15,7 +15,7 @@ spec:
       containers:
         - name: expiration
           image: justin8888/expiration
-          # image: asia-southeast1-docker.pkg.dev/ticket-396008/ticket/expiration
+          # image: asia.gcr.io/tick-397513/expiration
           # ports:
           #   - containerPort: 3000
           env:

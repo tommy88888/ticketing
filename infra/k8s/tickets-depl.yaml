@@ -15,7 +15,7 @@ spec:
       containers:
         - name: tickets
           image: justin8888/tickets
-          # image: asia-southeast1-docker.pkg.dev/ticket-396008/ticket/tickets
+          # image: asia.gcr.io/tick-397513/tickets
           # ports:
           #   - containerPort: 3000
           env:
